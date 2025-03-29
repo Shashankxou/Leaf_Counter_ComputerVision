@@ -1,8 +1,8 @@
 import torch
-import torch.nn as nn
 import numpy as np
+import torch.nn as nn
+from tqdm import tqdm
 import matplotlib.pyplot as plt
-from tqdm.notebook import tqdm
 
 
 def loss_function(y_real, y_pred):
@@ -36,7 +36,7 @@ def train(model, epochs, opt_segm, opt_count, data_tr, data_val, device):
         print('Training')
 
         for imgs, counts, masks in tqdm(data_tr):
-            imgs, counts, masks = imgs.to(device), counts.to(device), masks.to(device)
+            imgs, counts, masks = imgs.to(device).float(), counts.to(device).float(), masks.to(device).float()
 
             # Train segmentation
             opt_segm.zero_grad()
@@ -66,7 +66,7 @@ def train(model, epochs, opt_segm, opt_count, data_tr, data_val, device):
             avg_count_loss = 0
 
             for imgs, counts, masks in tqdm(data_val):
-                imgs, counts, masks = imgs.to(device), counts.to(device), masks.to(device)
+                imgs, counts, masks = imgs.to(device).float(), counts.to(device).float(), masks.to(device).float()
                 # Evaluate segmentation
                 output_segm = model.segmenter(imgs)
                 loss = loss_function(masks, output_segm)

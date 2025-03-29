@@ -18,10 +18,10 @@ def download_data_h5():
     # https://docs.google.com/forms/d/1REQf0rQ7uvwgnnQxEyjapzqYFNPUHiVRW13XPH95cow/viewform#start=openform.
     # The data download links are saved to the dataset_urls.txt file.
 
-    imgs_url, ground_truth_url = open("dataset_urls.txt").readlines()
+    # imgs_url, ground_truth_url = open("dataset_urls.txt").readlines()
 
-    wget.download(imgs_url)
-    wget.download(ground_truth_url)
+    # wget.download(imgs_url)
+    # wget.download(ground_truth_url)
 
     with zipfile.ZipFile('./CVPPP2017_training_images.zip', 'r') as zip_ref:
         zip_ref.extractall('data/')
@@ -151,9 +151,9 @@ def prepare_data():
     # download_data_h5()
     imgs, counts, masks = h5_to_sep_lists()
     train_dl, test_dl = get_loaders(imgs, counts, masks)
-    # print('> Showing example')
-    save_hd_img(train_dl)
+    print('> Showing example')
+    # save_hd_img(train_dl)
     # show_dataset_example(train_dl)
-    # print('> Returning loaders')
+    print('> Returning loaders')
 
     return train_dl, test_dl

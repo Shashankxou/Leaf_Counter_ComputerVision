@@ -21,3 +21,4 @@ bin-release/
 # information for Eclipse / Flash Builder.
 /src/dataset_urls.txt
 /src/__pycache__/
+*.zip
